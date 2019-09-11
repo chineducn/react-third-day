@@ -34,21 +34,34 @@ function Market() {
     console.log('Market first renders, OR re-rendered for whatever reason');
   });
 
+  // useEffect(() => {
+  //   // THIS EFFECT RUNS ONLY AFTER THE FIRST RENDER
+  //   // step 3: use axios to get some fruits!
+  //   // don't forget about passing empty array as second arg to useEffect
+  //   // don't forget axios wraps the response -- our stuff is inside response.data
+  //   axios.get(fruitsApi)
+  //     .then(response => {
+  //       // setStock will shove a new stock into Market state
+  //       // (which will cause the whole render process to trigger again)
+  //       setStock({ fruits: response.data })
+  //     })
+  //     .catch(error => {
+  //       setError(error.message);
+  //     });
+  // }, []); // empty array makes it so this effect does not happen on re-renders
+
   useEffect(() => {
-    // THIS EFFECT RUNS ONLY AFTER THE FIRST RENDER
-    // step 3: use axios to get some fruits!
-    // don't forget about passing empty array as second arg to useEffect
-    // don't forget axios wraps the response -- our stuff is inside response.data
     axios.get(fruitsApi)
-      .then(response => {
-        // setStock will shove a new stock into Market state
-        // (which will cause the whole render process to trigger again)
-        setStock({ fruits: response.data })
+      .then(fruitsResponse => {
+        axios.get(meatsApi)
+          .then(meatResponse => {
+            setStock({
+              meats: meatResponse.data,
+              fruits: fruitsResponse.data,
+            })
+          })
       })
-      .catch(error => {
-        setError(error.message);
-      });
-  }, []); // empty array makes it so this effect does not happen on re-renders
+  }, [])
 
   useEffect(() => {
     // THIS EFFECT AFTER THE FIRST RENDER, OR anything in the array changes
@@ -61,6 +74,7 @@ function Market() {
         error
       }
       <Fruits fruits={stock.fruits} addToCart={addToCart} />
+      <Fruits fruits={stock.meats} addToCart={addToCart} />
       <Cart items={cart} />
     </div>
   );
