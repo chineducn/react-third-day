@@ -50,17 +50,26 @@ function Market() {
   //     });
   // }, []); // empty array makes it so this effect does not happen on re-renders
 
+  // useEffect(() => {
+  //   axios.get(fruitsApi)
+  //     .then(fruitsResponse => {
+  //       axios.get(meatsApi)
+  //         .then(meatResponse => {
+  //           setStock({
+  //             meats: meatResponse.data,
+  //             fruits: fruitsResponse.data,
+  //           });
+  //         });
+  //     });
+  // }, [])
+
   useEffect(() => {
-    axios.get(fruitsApi)
-      .then(fruitsResponse => {
-        axios.get(meatsApi)
-          .then(meatResponse => {
-            setStock({
-              meats: meatResponse.data,
-              fruits: fruitsResponse.data,
-            });
-          });
-      });
+    const fruitsPromise = axios.get(fruitsApi);
+    const meatsPromise = axios.get(meatsApi);
+    Promise.all([fruitsPromise, meatsPromise])
+      .then((data) => {
+        debugger
+      })
   }, [])
 
   useEffect(() => {
