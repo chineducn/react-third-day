@@ -18,7 +18,7 @@ function Market() {
   };
 
   // by invoking useEffect passing a callback "foo"
-  // we are telling react:
+  // we are telling the browser:
   // hey, react! Once you are done updating the DOM,
   // go ahead and invoke the callback "foo"
   useEffect(() => {
@@ -29,8 +29,14 @@ function Market() {
   });
 
   useEffect(() => {
+    // THIS EFFECT RUNS ONLY AFTER THE FIRST RENDER
     console.log('Market first rendered. You will not see mee again');
   }, []);
+
+  useEffect(() => {
+    // THIS EFFECT AFTER THE FIRST RENDER, OR anything in the array changes
+    console.log('Market first renders, OR the fruits changed');
+  }, [stock.fruits]);
 
   return (
     <div className="App">
