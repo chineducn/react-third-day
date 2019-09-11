@@ -58,9 +58,9 @@ function Market() {
             setStock({
               meats: meatResponse.data,
               fruits: fruitsResponse.data,
-            })
-          })
-      })
+            });
+          });
+      });
   }, [])
 
   useEffect(() => {
