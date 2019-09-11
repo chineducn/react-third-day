@@ -9,6 +9,7 @@ const fruitsApi = 'http://localhost:4000/market/fruits';
 const meatsApi = 'http://localhost:4000/market/meats';
 
 function Market() {
+  const [error, setError] = useState(null);
   // step 2:
   // we will hydrate state with the stuff from the API
   // so let's just start out with empty arrays for fruits and meats
@@ -40,7 +41,12 @@ function Market() {
     // don't forget axios wraps the response -- our stuff is inside response.data
     axios.get(fruitsApi)
       .then(response => {
-        debugger
+        // setStock will shove a new stock into Market state
+        // (which will cause the whole render process to trigger again)
+        setStock({ fruits: response.data })
+      })
+      .catch(error => {
+        setError(error.message);
       })
   }, []);
 
@@ -51,6 +57,9 @@ function Market() {
 
   return (
     <div className="App">
+      {
+        error
+      }
       <Fruits fruits={stock.fruits} addToCart={addToCart} />
       <Cart items={cart} />
     </div>
