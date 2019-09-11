@@ -18,7 +18,7 @@ function Market() {
   };
 
   // by invoking useEffect passing a callback "foo"
-  // we are telling the browser:
+  // we are telling react:
   // hey, react! Once you are done updating the DOM,
   // go ahead and invoke the callback "foo"
   useEffect(() => {
