@@ -95,3 +95,18 @@ function Market() {
 }
 
 export default Market;
+
+
+function foo({ name, age }) {
+  // assumes an object gets injected
+  // name and age
+}
+
+function baz([name, age]) {
+  // assumes a two-element (at least) array gets injected
+  // name and age
+}
+
+function bar(props) {
+  const { name, age } = props;
+}
