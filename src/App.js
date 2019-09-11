@@ -35,7 +35,13 @@ function Market() {
 
   useEffect(() => {
     // THIS EFFECT RUNS ONLY AFTER THE FIRST RENDER
-    console.log('Market first rendered. You will not see mee again');
+    // step 3: use axios to get some fruits!
+    // don't forget about passing empty array as second arg to useEffect
+    // don't forget axios wraps the response -- our stuff is inside response.data
+    axios.get(fruitsApi)
+      .then(response => {
+        debugger
+      })
   }, []);
 
   useEffect(() => {
