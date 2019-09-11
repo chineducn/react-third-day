@@ -67,8 +67,11 @@ function Market() {
     const fruitsPromise = axios.get(fruitsApi);
     const meatsPromise = axios.get(meatsApi);
     Promise.all([fruitsPromise, meatsPromise])
-      .then((data) => {
-        debugger
+      .then(([ fruitsAxiosRes, meatsAxiosRes ]) => {
+        setStock({
+          fruits: fruitsAxiosRes.data,
+          meats: meatsAxiosRes.data,
+        });
       })
   }, [])
 
