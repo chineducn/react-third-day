@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cart from './Cart';
 import Fruits from './Fruits';
 import './App.css';
 
@@ -19,12 +20,7 @@ function Market() {
   return (
     <div className="App">
       <Fruits fruits={stock.fruits} addToCart={addToCart} />
-      <h3>Cart:</h3>
-      {
-        cart.length
-          ? cart.map((item, idx) => <div key={idx}>{item}</div>)
-          : <div>Nothing in the cart. Sad!</div>
-      }
+      <Cart items={cart} />
     </div>
   );
 }
