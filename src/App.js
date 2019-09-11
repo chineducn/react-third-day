@@ -47,7 +47,7 @@ function Market() {
       })
       .catch(error => {
         setError(error.message);
-      })
+      });
   }, []);
 
   useEffect(() => {
