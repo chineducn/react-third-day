@@ -50,6 +50,8 @@ function Market() {
   //     });
   // }, []); // empty array makes it so this effect does not happen on re-renders
 
+  // CHRISTMAS TREES ARE BAD
+  // YOU ARE DOING IT WRONG
   // useEffect(() => {
   //   axios.get(fruitsApi)
   //     .then(fruitsResponse => {
