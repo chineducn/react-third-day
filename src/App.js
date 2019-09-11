@@ -48,7 +48,7 @@ function Market() {
       .catch(error => {
         setError(error.message);
       });
-  }, []);
+  }, []); // empty array makes it so this effect does not happen on re-renders
 
   useEffect(() => {
     // THIS EFFECT AFTER THE FIRST RENDER, OR anything in the array changes
