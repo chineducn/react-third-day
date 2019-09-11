@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+// step 1: bring axios!
+import axios from 'axios';
 import Cart from './Cart';
 import Fruits from './Fruits';
 import './App.css';
@@ -7,9 +9,12 @@ const fruitsApi = 'http://localhost:4000/market/fruits';
 const meatsApi = 'http://localhost:4000/market/meats';
 
 function Market() {
+  // step 2:
+  // we will hydrate state with the stuff from the API
+  // so let's just start out with empty arrays for fruits and meats
   const [stock, setStock] = useState({
-    fruits: ['orange', 'lemon'],
-    meats: ['beef', 'chicken'],
+    fruits: [],
+    meats: [],
   });
   const [cart, setCart] = useState([]);
 
