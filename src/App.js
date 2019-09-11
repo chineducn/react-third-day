@@ -63,7 +63,7 @@ function Market() {
   //           });
   //         });
   //     });
-  // }, [])
+  // }, []);
 
   useEffect(() => {
     const fruitsPromise = axios.get(fruitsApi);
