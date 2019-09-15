@@ -5,7 +5,7 @@ import './App.css';
 import axios from 'axios';
 
 const fruitsApi = 'http://localhost:4000/market/fruits';
-const meatsApi = 'http://localhost:4000/market/munchies';
+const munchiesApi = 'http://localhost:4000/market/munchies';
 
 function Market() {
   
@@ -21,20 +21,32 @@ function Market() {
 
   const [errorState, setErrorState] = useState(null);
 
+  // useEffect(() => {
+  //   axios.get(fruitsApi)
+  //     .then(fruitImport => {
+        
+  //       const { data } = fruitImport;
+  //       // debugger
+  //       setStockState({ fruitStock: data, munchiesStock:[]});
+  //     })
+  //     .catch(errorItem => {
+  //       setErrorState(errorItem.message);
+  //     }
+  //   )
+  // }, []);
+  
   useEffect(() => {
     axios.get(fruitsApi)
-      .then(fruitImport => {
-        
-        const { data } = fruitImport;
-        // debugger
-        setStockState({ fruitStock: data, munchiesStock:[]});
-      })
-      .catch(errorItem => {
-        setErrorState(errorItem.message);
-      }
-    )
-  }, []);
-   
+      .then(fruitsImport => {
+        axios.get(munchiesApi)
+          .then(munchiesImport => {
+            setStockState({
+              fruitStock: fruitsImport.data,
+              munchiesStock: munchiesImport.data
+            })
+        })
+    })
+   }, [])
 
   return (
     <div className="App">
