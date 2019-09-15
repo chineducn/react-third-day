@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Items from './Items';
 import Cart from './Cart';
 import './App.css';
+import axios from 'axios';
 
 const fruitsApi = 'http://localhost:4000/market/fruits';
 const meatsApi = 'http://localhost:4000/market/munchies';
 
 function Market() {
   
+  // const [stockState, setStockState] = useState({
+  //   fruitStock: ['udara', 'ichekwu', 'sour chop', 'mango', 'avocado'],
+  //   munchiesStock: ['date', 'suya', 'puff-puff', 'springroll', 'kilishi']
+  // })
   const [stockState, setStockState] = useState({
-    fruitStock: ['udara', 'ichekwu', 'sour chop', 'mango', 'avocado'],
-    munchiesStock: ['date', 'suya', 'puff-puff', 'springroll', 'kilishi']
+    fruitStock: [],
+    munchiesStock: []
   })
-
- 
   
   const { fruitStock, munchiesStock } = stockState;
-  console.log(fruitStock);
-  console.log(munchiesStock)
-
   
   const [cartState, setCartState] = useState([]);
 
+  useEffect(() => {
+    axios.get(fruitsApi)
+      .then(fruitImport => {
+        // debugger
+        const { data } = fruitImport;
+        console.log(data);
+    })
+  });
    
 
   return (

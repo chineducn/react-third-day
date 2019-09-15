@@ -5,8 +5,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const fruits = ['udara', 'ichekwu', 'sour chop', 'mango', 'avocado'];
-const munchies = ['date', 'suya', 'puff-puff', 'springroll', 'kilishi'];
+const fruits = ['udara', 'ichekwu', 'sour chop', 'mango', 'avocado', 'melon'];
+const munchies = ['date', 'suya', 'puff-puff', 'springroll', 'kilishi', 'scotch egg'];
 
 const friends = [
   { id: '1', name: 'gabe', email: 'gabe@gabe.com', age: 42 },
