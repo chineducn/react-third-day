@@ -5,8 +5,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const fruits = ['pear', 'mango', 'banana', 'kiwi'];
-const meats = ['beef', 'chicken', 'fish'];
+const fruits = ['udara', 'ichekwu', 'sour chop', 'mango', 'avocado'];
+const munchies = ['date', 'suya', 'puff-puff', 'springroll', 'kilishi'];
 
 const friends = [
   { id: '1', name: 'gabe', email: 'gabe@gabe.com', age: 42 },
@@ -21,8 +21,8 @@ app.get('/market/fruits', (req, res) => {
   res.json(fruits);
 });
 
-app.get('/market/meats', (req, res) => {
-  res.json(meats);
+app.get('/market/munchies', (req, res) => {
+  res.json(munchies);
 });
 
 app.get('/friends/:id/name', (req, res) => {
