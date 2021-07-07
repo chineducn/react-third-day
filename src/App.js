@@ -1,57 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Items from './Items';
+import Cart from './Cart';
 import './App.css';
+import axios from 'axios';
 
 const fruitsApi = 'http://localhost:4000/market/fruits';
-const meatsApi = 'http://localhost:4000/market/meats';
-
-function Fruit(props) {
-  const { name, addToCart } = props;
-  return (
-    <div>
-      <span>{name}</span>
-      <button onClick={evt => addToCart(name)}>Add To Cart</button>
-    </div>
-  );
-}
-
-function Fruits(props) {
-  const { fruits, addToCart } = props;
-  return (
-    <>
-      {
-        fruits.map(
-          (fruitName) => (
-            <Fruit
-              key={fruitName}
-              name={fruitName}
-              addToCart={addToCart}
-            />
-          ))
-      }
-    </>
-  )
-}
+const munchiesApi = 'http://localhost:4000/market/munchies';
 
 function Market() {
-  const [stock, setStock] = useState({
-    fruits: ['orange', 'lemon'],
-    meats: ['beef', 'chicken'],
-  });
-  const [cart, setCart] = useState([]);
+  
+  const [stockState, setStockState] = useState({
+    fruitStock: [],
+    munchiesStock: []
+  })
+  
+  const { fruitStock, munchiesStock } = stockState;
+  // console.log(fruitStock)
+  
+  const [cartState, setCartState] = useState([]);
 
-  const addToCart = (item) => {
-    setCart(cart.concat(item));
-  };
+  const [errorState, setErrorState] = useState(null);
+
+  // useEffect(() => {
+  //   axios.get(fruitsApi)
+  //     .then(fruitImport => {
+        
+  //       const { data } = fruitImport;
+  //       // debugger
+  //       setStockState({ fruitStock: data, munchiesStock:[]});
+  //     })
+  //     .catch(errorItem => {
+  //       setErrorState(errorItem.message);
+  //     }
+  //   )
+  // }, []);
+  
+  useEffect(() => {
+    axios.get(fruitsApi)
+      .then(fruitsImport => {
+        axios.get(munchiesApi)
+          .then(munchiesImport => {
+            setStockState({
+              fruitStock: fruitsImport.data,
+              munchiesStock: munchiesImport.data
+            })
+        })
+    })
+   }, [])
 
   return (
     <div className="App">
-      <Fruits fruits={stock.fruits} addToCart={addToCart} />
-      <h3>Cart:</h3>
-      {
-        cart.length
-          ? cart.map((item, idx) => <div key={idx}>{item}</div>)
-          : <div>Nothing in the cart. Sad!</div>
-      }
+      <h1>{errorState}</h1>
+      {/* <Fruit name={nameApp}/> */}
+      <Items itemsArray={fruitStock} cartFunction={setCartState} cartArray={cartState}/>
+      <Items itemsArray={munchiesStock} cartFunction={setCartState} cartArray={cartState}/>
+      <Cart cartArray={cartState} />
+            
+      
     </div>
   );
 }
